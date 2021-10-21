@@ -1,0 +1,31 @@
+Given a string s, find the length of the longest substring without repeating characters.
+
+USED SLIDING WINDOW METHOD 
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        //sliding window approach
+        vector<int> chars(128, -1); //128 possiblr chars given in string
+        
+        int left = 0; //contract window
+        int right = 0; //stretch window
+        
+        int res = 0; //check results
+        while(right < s.length()) { //slide window; if right window doesnt reach to s.lemgths                                      // = keep extending
+                char r = s[right];
+                
+            
+         int index = chars[r];
+            if(index != -1 && index >= left && index < right){
+                left = index + 1;
+            }
+            res = max(res, right - left + 1);
+            chars[r] = right;
+            right++;
+           
+            
+        }
+        return res;
+    }
+};
